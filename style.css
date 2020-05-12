@@ -1,0 +1,104 @@
+body {
+  background-color: rgb(31, 31, 31);
+  font-family: "Raleway", sans-serif;
+}
+
+.hdiv {
+  margin-top: 10px;
+  margin-left: 10px;
+  height: 30px;
+  width: 100%;
+  display: inline-block;
+}
+
+.adiv {
+  border-width: 4px;
+  border-style: double;
+
+  border-color: bisque;
+  color: white;
+  margin: 1%;
+  padding: 5px;
+}
+
+.bdiv {
+  border-width: 1px;
+  border-style: solid;
+  border-color: bisque;
+  color: white;
+  margin: 1%;
+  font-size: medium;
+  width: 47.75%;
+  padding: 7px;
+  display: inline-block;
+}
+
+.heading {
+  margin-left: 10px;
+}
+
+.hbutton {
+  background-attachment: scroll;
+  height: 40px;
+  background-color: rgb(31, 31, 31);
+  border-width: 1px;
+  border-style: solid;
+  border-color: white;
+  color: white;
+  width: 15%;
+  height: 100%;
+  font-size: large;
+  margin: 0 auto;
+  text-overflow: inherit;
+}
+
+.hbutton:hover {
+  background-color: bisque;
+  border-width: 1px;
+  border-style: solid;
+  border-color: white;
+  color: black;
+}
+
+.media {
+  font-size: 36px;
+  color: transparent;
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  padding-top: 0px;
+  padding-top: 0px;
+  -webkit-text-stroke: 1px white;
+}
+.media:hover {
+  color: bisque;
+  -webkit-text-stroke: 1px bisque;
+}
+
+.full-page-container {
+  height: 100vh;
+  width: 100vw;
+  text-align: center;
+}
+
+.info-main {
+  position: relative;
+  top: 25vh;
+}
+
+.big-break {
+  width: 100%;
+  height: 2px;
+  color: bisque;
+}
+
+.project {
+  width: 100%;
+  height: 75px;
+}
+
+.name {
+  color: snow;
+  text-decoration: double;
+  display: inline-block;
+}
