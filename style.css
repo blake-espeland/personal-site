@@ -50,6 +50,8 @@ body {
   font-size: large;
   margin: 0 auto;
   text-overflow: inherit;
+  display: inline-block;
+  text-decoration: none;
 }
 
 .hbutton:hover {
