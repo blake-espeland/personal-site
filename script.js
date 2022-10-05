@@ -10,12 +10,9 @@ function scrollToAnchor(aid) {
 }
 
 $(function () {
-  $("#name").hide();
-  $(".hbutton").hide();
+  $(".heading").hide();
   $(".media").hide();
-  $("#name").fadeIn("slow", function () {
-    $(".hbutton").fadeIn("slow", function () {
-      $(".media").fadeIn("slow");
-    });
-  });
+  $(".heading").fadeIn("slow");
+  $(".media").fadeIn("slow");
 });
+
