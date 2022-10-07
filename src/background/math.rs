@@ -2,10 +2,12 @@ use std::f64::consts::PI;
 use std::iter::Sum;
 use std::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Neg, Sub, SubAssign};
 
+use serde::{Serialize, Deserialize};
+
 // at the time of writing the TAU constant is still unstable
 pub const TAU: f64 = 2.0 * PI;
 
-#[derive(Clone, Copy, Debug, Default, PartialEq)]
+#[derive(Clone, Copy, Debug, Default, PartialEq, Serialize, Deserialize)]
 pub struct Vector2D {
     pub x: f64,
     pub y: f64,

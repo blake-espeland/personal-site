@@ -4,12 +4,14 @@ use super::settings::Settings;
 use gloo::timers::callback::Interval;
 use yew::{html, Component, Context, Html, Properties};
 
-pub const SIZE: Vector2D = Vector2D::new(1600.0, 1000.0);
+use web_sys::Window;
 
 #[derive(Debug)]
 pub enum Msg {
-    Tick,
+    Tick
 }
+
+
 
 #[derive(Clone, Debug, PartialEq, Properties)]
 pub struct Props {
@@ -18,21 +20,42 @@ pub struct Props {
     pub generation: usize,
     #[prop_or_default]
     pub paused: bool,
+    
 }
 
 #[derive(Debug)]
 pub struct Simulation {
     boids: Vec<Boid>,
     interval: Interval,
+    pub win: Window,
 }
+
+pub fn get_window_size(w: &Window) -> Vector2D{
+    Vector2D {
+        x: match w.inner_width() {
+            Ok(v) => v.as_f64().expect("Couldn't get window width."),
+            Err(_) => 1080.0,
+        },
+        y: match w.inner_height() {
+            Ok(v) => v.as_f64().expect("Couldn't get window height."),
+            Err(_) => 1920.0,
+        },
+    }
+}
+
 impl Component for Simulation {
     type Message = Msg;
     type Properties = Props;
 
+
+
     fn create(ctx: &Context<Self>) -> Self {
+        let w = web_sys::window().expect("Couldn't get window element.");
+
+        let bounds: Vector2D = get_window_size(&w);
         let settings = &ctx.props().settings;
         let boids = (0..settings.boids)
-            .map(|_| Boid::new_random(settings))
+            .map(|_| Boid::new_random(settings, &bounds))
             .collect();
 
         let interval = {
@@ -41,8 +64,7 @@ impl Component for Simulation {
                 link.send_message(Msg::Tick)
             })
         };
-
-        Self { boids, interval }
+        Self { boids, interval, win: w }
     }
 
     fn update(&mut self, ctx: &Context<Self>, msg: Self::Message) -> bool {
@@ -54,10 +76,12 @@ impl Component for Simulation {
                     ..
                 } = *ctx.props();
 
+
+
                 if paused {
                     false
                 } else {
-                    Boid::update_all(settings, &mut self.boids);
+                    Boid::update_all(settings, &mut self.boids, &get_window_size(&self.win));
                     true
                 }
             }
@@ -66,10 +90,10 @@ impl Component for Simulation {
 
     fn changed(&mut self, ctx: &Context<Self>) -> bool {
         self.boids.clear();
-
+        let bounds: Vector2D = get_window_size(&self.win);
         let settings = &ctx.props().settings;
         self.boids
-            .resize_with(settings.boids, || Boid::new_random(settings));
+            .resize_with(settings.boids, || Boid::new_random(settings, &bounds));
 
         // as soon as the previous task is dropped it is cancelled.
         // We don't need to worry about manually stopping it.
@@ -84,7 +108,8 @@ impl Component for Simulation {
     }
 
     fn view(&self, _ctx: &Context<Self>) -> Html {
-        let view_box = format!("0 0 {} {}", SIZE.x, SIZE.y);
+        let size = get_window_size(&self.win);
+        let view_box = format!("0 0 {} {}", size.x, size.y);
 
         html! {
             <svg class="simulation-window" viewBox={view_box}>
@@ -92,4 +117,6 @@ impl Component for Simulation {
             </svg>
         }
     }
+
+
 }

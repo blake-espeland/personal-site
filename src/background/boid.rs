@@ -1,9 +1,10 @@
 use super::math::{self, Mean, Vector2D, WeightedMean};
 use super::settings::Settings;
-use super::simulation::SIZE;
 use rand::Rng;
 use std::iter;
 use yew::{html, Html};
+
+const DEFAULT_SIZE: Vector2D = Vector2D {x: 1600.0, y: 1000.0};
 
 #[derive(Clone, Debug, PartialEq)]
 pub struct Boid {
@@ -13,13 +14,13 @@ pub struct Boid {
 }
 
 impl Boid {
-    pub fn new_random(settings: &Settings) -> Self {
+    pub fn new_random(settings: &Settings, bounds: &Vector2D) -> Self {
         let mut rng = rand::thread_rng();
 
         let radius = 2.0;
 
         Self {
-            position: Vector2D::new(rng.gen::<f64>() * SIZE.x, rng.gen::<f64>() * SIZE.y),
+            position: Vector2D::new(rng.gen::<f64>() * bounds.x, rng.gen::<f64>() * bounds.y),
             velocity: Vector2D::from_polar(rng.gen::<f64>() * math::TAU, settings.max_speed),
             radius,
         }
@@ -52,9 +53,10 @@ impl Boid {
             .unwrap_or_default()
     }
 
-    fn keep_in_bounds(&mut self, settings: &Settings) {
-        let min = SIZE * settings.border_margin;
-        let max = SIZE - min;
+    fn keep_in_bounds(&mut self, settings: &Settings, new_bounds: &Vector2D) {
+        let n = new_bounds.clone();
+        let min = n * settings.border_margin;
+        let max = n - min;
 
         let mut v = Vector2D::default();
 
@@ -85,20 +87,20 @@ impl Boid {
         self.velocity = v.clamp_magnitude(settings.max_speed);
     }
 
-    fn update(&mut self, settings: &Settings, boids: VisibleBoidIter) {
+    fn update(&mut self, settings: &Settings, boids: VisibleBoidIter, new_bounds: &Vector2D) {
         self.update_velocity(settings, boids);
-        self.keep_in_bounds(settings);
+        self.keep_in_bounds(settings, new_bounds);
         self.position += self.velocity;
     }
 
-    pub fn update_all(settings: &Settings, boids: &mut [Self]) {
+    pub fn update_all(settings: &Settings, boids: &mut [Self], new_bounds: &Vector2D) {
         for i in 0..boids.len() {
             let (before, after) = boids.split_at_mut(i);
             let (boid, after) = after.split_first_mut().unwrap();
             let visible_boids =
                 VisibleBoidIter::new(before, after, boid.position, settings.visible_range);
 
-            boid.update(settings, visible_boids);
+            boid.update(settings, visible_boids, new_bounds);
         }
     }
 

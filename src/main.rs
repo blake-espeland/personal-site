@@ -1,73 +1,36 @@
 mod background;
-mod list;
+mod media;
 
-use list::list::List;
-use list::header::ListHeader;
-use list::item::ListItem;
+use background::math::Vector2D;
+use media::button::Button;
 
 use background::settings::Settings;
 use background::simulation::Simulation;
 
-use yew::html::Scope;
-use yew::{html, html_nested, Component, Context, Html, MouseEvent};
-use yew::html::ImplicitClone;
+use wasm_bindgen::JsCast;
+use yew::functional::use_state_eq;
+use yew::ContextProvider;
+use yew::{html, Component, Context, Html};
 
-use std::cell::RefCell;
-use std::ops::Deref;
-use std::rc::Rc;
-
-pub struct WeakComponentLink<COMP: Component>(Rc<RefCell<Option<Scope<COMP>>>>);
-
-impl<COMP: Component> Clone for WeakComponentLink<COMP> {
-    fn clone(&self) -> Self {
-        Self(Rc::clone(&self.0))
-    }
-}
-impl<COMP: Component> ImplicitClone for WeakComponentLink<COMP> {}
-
-impl<COMP: Component> Default for WeakComponentLink<COMP> {
-    fn default() -> Self {
-        Self(Rc::default())
-    }
-}
-
-impl<COMP: Component> Deref for WeakComponentLink<COMP> {
-    type Target = Rc<RefCell<Option<Scope<COMP>>>>;
-
-    fn deref(&self) -> &Self::Target {
-        &self.0
-    }
-}
-
-impl<COMP: Component> PartialEq for WeakComponentLink<COMP> {
-    fn eq(&self, other: &Self) -> bool {
-        Rc::ptr_eq(&self.0, &other.0)
-    }
-}
-
-#[derive(Debug)]
-pub enum Hovered {
-    Header,
-    Item(String),
-    List,
-    None,
-}
-
+use web_sys::Window;
 pub enum Msg {
     ChangeSettings(Settings),
     ResetSettings,
     RestartSimulation,
     TogglePause,
-    Hover(Hovered)
+}
+
+#[derive(Clone, Debug, PartialEq)]
+pub struct FrameProps {
+    x: f64,
+    y: f64,
 }
 
 pub struct Model {
     settings: Settings,
     generation: usize,
     paused: bool,
-    hovered: Hovered,
-    list_link: WeakComponentLink<List>,
-    sub_list_link: WeakComponentLink<List>,
+    window_size: Vector2D,
 }
 
 impl Component for Model {
@@ -75,13 +38,21 @@ impl Component for Model {
     type Properties = ();
 
     fn create(_ctx: &Context<Self>) -> Self {
+        let w = web_sys::window().expect("Couldn't get window element.");
         Self {
             settings: Settings::load(),
             generation: 0,
             paused: false,
-            hovered: Hovered::None,
-            list_link: WeakComponentLink::default(),
-            sub_list_link: WeakComponentLink::default(),
+            window_size: Vector2D {
+                x: match w.inner_width() {
+                    Ok(v) => v.as_f64().expect("Couldn't get window width."),
+                    Err(_) => 1080.0,
+                },
+                y: match w.inner_height() {
+                    Ok(v) => v.as_f64().expect("Couldn't get window height."),
+                    Err(_) => 1920.0,
+                },
+            },
         }
     }
 
@@ -105,63 +76,27 @@ impl Component for Model {
                 self.paused = !self.paused;
                 true
             }
-            Msg::Hover(h) => {
-                self.hovered = h;
-                true
-            }
         }
     }
 
-    fn view(&self, ctx: &Context<Self>) -> Html {
-        let Self {
-            ref settings,
-            generation,
-            paused,
-            ..
-        } = *self;
-
-        let on_hover = &ctx.link().callback(Msg::Hover);
-        let _onmouseover = &ctx.link().callback(|_: MouseEvent| Msg::Hover(Hovered::None));
-        let onmouseoversublist = &ctx.link().callback(|e: MouseEvent| {
-            e.stop_propagation();
-            Msg::Hover(Hovered::List)
-        });
-        let list_link = &self.list_link;
-        let sub_list_link = &self.sub_list_link;
-
-        // note the use of `html_nested!` instead of `html!`.
-        let letters = ('A'..='C')
-            .map(|letter| html_nested! { <ListItem name={letter.to_string()} {on_hover} /> });
+    fn view(&self, _ctx: &Context<Self>) -> Html {
+        let w = web_sys::window().expect("Couldn't get window element.");
 
         html! {
             <>
                 <h1 class="title">{ "Blake Espeland" }</h1>
-                <Simulation settings={settings.clone()} {generation} {paused} />
-                { self.view_panel(ctx.link()) }
-                <List {on_hover} weak_link={list_link}>
-                    <ListHeader text="Calling all Rusties!" {on_hover} {list_link} />
-                    <ListItem name="Rustin" {on_hover} />
-                    <ListItem hide=true name="Rustaroo" {on_hover} />
-                    <ListItem name="Rustifer" {on_hover}>
-                        <div class="sublist" onmouseover={onmouseoversublist}>{ "Sublist!" }</div>
-                        <List {on_hover} weak_link={sub_list_link}>
-                            <ListHeader text="Sub Rusties!" {on_hover} list_link={sub_list_link}/>
-                            <ListItem hide=true name="Hidden Sub" {on_hover} />
-                            { for letters }
-                        </List>
-                    </ListItem>
-                </List>
+                <Simulation settings={self.settings.clone()} generation={self.generation} paused={self.paused}/>
+                <div class="button-container">
+                    <Button text={"GitHub"} class={"button"} show={true} link={"https://github.com/blake-espeland/"}/>
+                    <Button text={"LinkedIn"} class={"button"} show={true} link={"https:://linkedin.com/in/blake-espeland/"}/>
+                    <Button text={"Resume"} class={"button"} show={true} link={""}/>
+                    <Button text={"Projects"} class={"button"} show={true} link={""}/>
+                </div>
             </>
         }
     }
 }
-impl Model {
-    fn view_panel(&self, _link: &Scope<Self>) -> Html {
-        html! {
-
-        }
-    }
-}
+impl Model {}
 
 fn main() {
     yew::start_app::<Model>();

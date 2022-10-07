@@ -1,6 +1,10 @@
 use gloo::storage::{LocalStorage, Storage};
 use serde::{Deserialize, Serialize};
 
+use crate::FrameProps;
+
+use super::math::Vector2D;
+
 #[derive(Clone, Debug, PartialEq, Deserialize, Serialize)]
 pub struct Settings {
     /// amount of boids
@@ -44,7 +48,7 @@ impl Settings {
 impl Default for Settings {
     fn default() -> Self {
         Self {
-            boids: 1200,
+            boids: 1000,
             tick_interval_ms: 50,
             visible_range: 20.0,
             min_distance: 5.0,
@@ -53,7 +57,7 @@ impl Default for Settings {
             cohesion_factor: 0.01,
             separation_factor: 0.8,
             turn_speed_ratio: 0.15,
-            border_margin: 0.1,
+            border_margin: 0.0,
             color_adapt_factor: 0.05,
         }
     }

@@ -15,6 +15,16 @@ body {
   overflow: hidden;
 }
 
+.button-container{
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 200px;
+  display: grid;
+  grid-row: auto;
+  padding: 2%;
+}
+
 .title {
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke-width: 3px;
@@ -22,17 +32,21 @@ body {
 
   position: absolute;
   margin: 0.2em 0 0 0;
+  padding: 2%;
   width: 100%;
 
-  text-align: center;
+  text-align: left;
   font-size: 4em;
   text-transform: full-width;
 }
 
 .simulation-window {
+  border-radius: 2px;
+  border-color: $shade-10;
   height: 100%;
   width: 100%;
   opacity: 50%;
+  z-index: -1;
 }
 
 .panel {
@@ -65,18 +79,20 @@ body {
   }
 }
 
-button {
-  color: $shade-0;
-  background: $shade-10;
+.button {
+  color: $shade-10;
+  background: transparent;
   padding: 0.5em 2em;
 
   border: none;
-  border-radius: 1em;
 
   transition: 250ms;
+  font-size: 1.4em;
+  text-decoration: none;
 
   &:hover {
-    background: $teal;
+    transform: scale(1.1);
+    transform: translate3d(-10px, -10px, 10px);
   }
 
   &:active {
@@ -97,90 +113,6 @@ button {
 .project {
     color: $shade-10
 }
-
-.list-container {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-    border-radius: 4px;
-    background: #eee;
-  
-    &:hover {
-      background: #eaeaea;
-    }
-  }
-  
-  .list {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    border-radius: 3px;
-    border: 1px solid #666;
-    min-width: 30vw;
-  
-    &.inactive {
-      opacity: 0.5;
-    }
-  }
-  
-  .list-header {
-    background: #feecaa;
-    border-bottom: 1px solid #666;
-    padding: 10px;
-    cursor: pointer;
-  
-    &:hover {
-      background: #fee3a0;
-    }
-  }
-  
-  .list-item {
-    background: white;
-    border-bottom: 1px solid #666;
-    padding: 10px;
-  
-    &:hover {
-      background: #fafafa;
-    }
-  
-    &:last-child {
-      border-bottom: 0px;
-    }
-  
-    &-details {
-      background: #eee;
-      border: 1px solid #666;
-      border-radius: 3px;
-      margin-top: 10px;
-      padding: 10px;
-      text-align: center;
-  
-      &.list-container {
-        margin-top: 0px;
-        padding: 15px;
-      }
-    }
-  }
-  
-  .last-hovered {
-    margin-top: 20px;
-  
-    &-text {
-      color: #666;
-      margin-left: 5px;
-    }
-  }
-  
-  .sublist {
-    display: inline-block;
-    background: #fff;
-    border: 1px solid #666;
-    border-radius: 3px;
-    margin: 5px;
-    padding: 5px 20px;
-  }
 
 // Firefox Overrides
 ::-moz-range-track {
