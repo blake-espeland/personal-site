@@ -1,0 +1,194 @@
+$shade-0: #fff !default;
+$shade-1: #d7dcdf !default;
+$shade-10: #2c3e50 !default;
+$teal: #1abc9c !default;
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+
+  background: #F8EDE3;
+  color: $shade-10;
+  font-family: "Roboto", sans-serif;
+  height: 100%;
+  overflow: hidden;
+}
+
+.title {
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: $shade-10;
+
+  position: absolute;
+  margin: 0.2em 0 0 0;
+  width: 100%;
+
+  text-align: center;
+  font-size: 4em;
+  text-transform: full-width;
+}
+
+.simulation-window {
+  height: 100%;
+  width: 100%;
+  opacity: 50%;
+}
+
+.panel {
+  position: absolute;
+  bottom: 0;
+  margin: 0 5em;
+  padding: 5em 0 1em 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  opacity: 20%;
+  transition: 500ms ease-in-out;
+
+  &:hover {
+    opacity: unset;
+  }
+
+  &__buttons {
+    margin-top: 1em;
+
+    & > * {
+      min-width: 10em;
+
+      &:not(:first-child) {
+        margin-left: 1em;
+      }
+    }
+  }
+}
+
+button {
+  color: $shade-0;
+  background: $shade-10;
+  padding: 0.5em 2em;
+
+  border: none;
+  border-radius: 1em;
+
+  transition: 250ms;
+
+  &:hover {
+    background: $teal;
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+}
+
+.settings {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  & > * {
+    flex-basis: 30%;
+  }
+}
+
+.project {
+    color: $shade-10
+}
+
+.list-container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    border-radius: 4px;
+    background: #eee;
+  
+    &:hover {
+      background: #eaeaea;
+    }
+  }
+  
+  .list {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 3px;
+    border: 1px solid #666;
+    min-width: 30vw;
+  
+    &.inactive {
+      opacity: 0.5;
+    }
+  }
+  
+  .list-header {
+    background: #feecaa;
+    border-bottom: 1px solid #666;
+    padding: 10px;
+    cursor: pointer;
+  
+    &:hover {
+      background: #fee3a0;
+    }
+  }
+  
+  .list-item {
+    background: white;
+    border-bottom: 1px solid #666;
+    padding: 10px;
+  
+    &:hover {
+      background: #fafafa;
+    }
+  
+    &:last-child {
+      border-bottom: 0px;
+    }
+  
+    &-details {
+      background: #eee;
+      border: 1px solid #666;
+      border-radius: 3px;
+      margin-top: 10px;
+      padding: 10px;
+      text-align: center;
+  
+      &.list-container {
+        margin-top: 0px;
+        padding: 15px;
+      }
+    }
+  }
+  
+  .last-hovered {
+    margin-top: 20px;
+  
+    &-text {
+      color: #666;
+      margin-left: 5px;
+    }
+  }
+  
+  .sublist {
+    display: inline-block;
+    background: #fff;
+    border: 1px solid #666;
+    border-radius: 3px;
+    margin: 5px;
+    padding: 5px 20px;
+  }
+
+// Firefox Overrides
+::-moz-range-track {
+  background: $shade-10;
+  border: 0;
+}
+
+input::-moz-focus-inner,
+input::-moz-focus-outer {
+  border: 0;
+}
