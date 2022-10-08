@@ -54,9 +54,8 @@ impl Boid {
     }
 
     fn keep_in_bounds(&mut self, settings: &Settings, new_bounds: &Vector2D) {
-        let n = new_bounds.clone();
-        let min = n * settings.border_margin;
-        let max = n - min;
+        let min = Vector2D { x: 0.0, y: 0.0 };
+        let max = new_bounds.clone();
 
         let mut v = Vector2D::default();
 

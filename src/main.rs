@@ -87,10 +87,10 @@ impl Component for Model {
                 <h1 class="title">{ "Blake Espeland" }</h1>
                 <Simulation settings={self.settings.clone()} generation={self.generation} paused={self.paused}/>
                 <div class="button-container">
-                    <Button text={"GitHub"} class={"button"} show={true} link={"https://github.com/blake-espeland/"}/>
-                    <Button text={"LinkedIn"} class={"button"} show={true} link={"https:://linkedin.com/in/blake-espeland/"}/>
-                    <Button text={"Resume"} class={"button"} show={true} link={""}/>
-                    <Button text={"Projects"} class={"button"} show={true} link={""}/>
+                    <Button text={"GitHub"} class={"button"} download={""} link={"https://github.com/blake-espeland/"}/>
+                    <Button text={"LinkedIn"} class={"button"} download={""} link={"https://linkedin.com/in/blake-espeland/"}/>
+                    <Button text={"Resume"} class={"button"} download={"Blake_Espeland_Resume.docx"} link={"resources/Blake_Espeland_Resume.docx"}/>
+                    <Button text={"Projects"} class={"button"} download={""} link={""}/>
                 </div>
             </>
         }
