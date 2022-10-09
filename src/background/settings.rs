@@ -48,7 +48,7 @@ impl Default for Settings {
             tick_interval_ms: 50,
             visible_range: 20.0,
             min_distance: 5.0,
-            max_speed: 10.0,
+            max_speed: 7.5,
             alignment_factor: 0.15,
             cohesion_factor: 0.01,
             separation_factor: 0.8,

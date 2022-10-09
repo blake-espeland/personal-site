@@ -102,7 +102,7 @@ impl Boid {
     }
 
     pub fn render(&self) -> Html {
-        let color = "hsl(0rad, 50%, 0%)";
+        let color = "#2c3e50";
 
         let cx = format!("{}", self.position.x);
         let cy = format!("{}", self.position.y);

@@ -14,6 +14,8 @@ use background::simulation::Simulation;
 use yew::{html, Component, Context, Html};
 use wasm_logger;
 
+use gloo::console::log;
+
 pub enum Msg {
     ChangeSettings(Settings),
     ResetSettings,
@@ -70,6 +72,7 @@ impl Component for Model {
             }
             Msg::ToggleAbout => {
                 self.render_about = !self.render_about;
+                log!("render_about: {}", self.render_about);
                 true
             }
         }
@@ -84,10 +87,10 @@ impl Component for Model {
                     <Button text={"GitHub"} class={"button"} download={""} link={"https://github.com/blake-espeland/"}/>
                     <Button text={"LinkedIn"} class={"button"} download={""} link={"https://linkedin.com/in/blake-espeland/"}/>
                     <Button text={"Resume"} class={"button"} download={"Blake_Espeland_Resume.docx"} link={"resources/Blake_Espeland_Resume.docx"}/>
-                    <button onclick={ctx.link().callback(|_| Msg::ToggleAbout)} class="button">{self.get_proj_btn_txt()}</button>
+                    <button onclick={ctx.link().callback(|_| Msg::ToggleAbout)} class="pbutton">{self.get_proj_btn_txt()}</button>
+                    <button onclick={ctx.link().callback(|_| Msg::TogglePause)} class="button">{self.get_pause_play_txt()}</button>
                 </div>
                 <ProjContainer show={!self.render_about}/>
-
                 <AboutSection show={self.render_about}/>
             </>
         }
@@ -101,9 +104,16 @@ impl Model {
             "About"
         }
     }
+    fn get_pause_play_txt(&self) -> &str{
+        if self.paused{
+            "Play Boids"
+        }else{
+            "Pause Boids"
+        }
+    }
 }
 
 fn main() {
     wasm_logger::init(wasm_logger::Config::default());
-    yew::start_app::<Model>();
+    yew::Renderer::<Model>::new().render();
 }

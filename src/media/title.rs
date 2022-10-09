@@ -15,8 +15,8 @@ impl Component for Title{
     fn create(_ctx: &Context<Self>) -> Self {
         Self
     }
-    fn changed(&mut self, ctx: &Context<Self>) -> bool {
-        ctx.props().show
+    fn changed(&mut self, _ctx: &Context<Self>, p: &TitleProps) -> bool {
+        p.show
     }
 
     fn view(&self, _ctx: &Context<Self>) -> Html {

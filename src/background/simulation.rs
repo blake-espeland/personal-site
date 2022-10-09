@@ -88,10 +88,10 @@ impl Component for Simulation {
         }
     }
 
-    fn changed(&mut self, ctx: &Context<Self>) -> bool {
+    fn changed(&mut self, ctx: &Context<Self>, p: &Props) -> bool {
         self.boids.clear();
         let bounds: Vector2D = get_window_size(&self.win);
-        let settings = &ctx.props().settings;
+        let settings = &p.settings;
         self.boids
             .resize_with(settings.boids, || Boid::new_random(settings, &bounds));
 

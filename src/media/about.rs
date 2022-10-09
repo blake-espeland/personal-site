@@ -1,4 +1,3 @@
-use gloo::console::log;
 use yew::html;
 use yew::prelude::*;
 
@@ -22,9 +21,8 @@ impl Component for AboutSection{
         }
     }
 
-    fn changed(&mut self, ctx: &Context<Self>) -> bool {
-        log!("Updated about: {}", ctx.props().show);
-        self.rendered = ctx.props().show;
+    fn changed(&mut self, _ctx: &Context<Self>, _p: &AboutSectionProps) -> bool {
+        self.rendered = !self.rendered;
         true
     }
 

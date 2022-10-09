@@ -1,11 +1,13 @@
 $shade-0: #fff !default;
 $shade-1: #d7dcdf !default;
+$shade-2: #FF731D;
 $shade-10: #2c3e50 !default;
 $teal: #1abc9c !default;
 $beige: #F8EDE3;
 // $box-shadow:
 $outer-margin: 3%;
 $border-radius: 5px;
+$inner-padding: 1%;
 
 html,
 body {
@@ -26,12 +28,14 @@ body {
   display: grid;
   grid-row: auto;
   margin: $outer-margin;
+  text-align: left;
 }
 
 .title {
   -webkit-text-fill-color: transparent;
-  -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: $shade-10;
+  font-style: italic;
   font-size: 4em;
 }
 
@@ -46,6 +50,27 @@ body {
   width: 100%;
   opacity: 50%;
   z-index: -1;
+}
+
+.pbutton {
+  color: $shade-2;
+  background: transparent;
+  padding: 0.5em 2em;
+
+  border: none;
+
+  transition: 250ms;
+  font-size: 1.4em;
+  text-decoration: none;
+
+  &:hover {
+    transform: scale(1.1);
+    transform: translate3d(-10px, -10px, 10px);
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
 }
 
 .button {
@@ -84,10 +109,11 @@ body {
   left: 0;
   bottom: 0;
   margin: $outer-margin;
-  padding: 1%;
+  padding: $inner-padding;
   background-color: $beige;
-  max-width: 80%;
-
+  max-width: 50%;
+  transition: 250ms;
+  text-align: center;
 
   border-radius: $border-radius;
   border-color: $shade-10;
@@ -99,9 +125,10 @@ body {
   left: 0;
   bottom: 0;
   margin: $outer-margin;
-  padding: 1%;
+  padding: $inner-padding;
   background-color: $beige;
   max-width: 31%;
+  transition: 250ms;
 
   border-radius: $border-radius;
   border-color: $shade-10;
