@@ -2,81 +2,50 @@ $shade-0: #fff !default;
 $shade-1: #d7dcdf !default;
 $shade-10: #2c3e50 !default;
 $teal: #1abc9c !default;
+$beige: #F8EDE3;
+// $box-shadow:
+$outer-margin: 3%;
+$border-radius: 5px;
 
 html,
 body {
   margin: 0;
-  padding: 0;
 
-  background: #F8EDE3;
+  background: $beige;
   color: $shade-10;
   font-family: "Roboto", sans-serif;
   height: 100%;
   overflow: hidden;
 }
 
-.button-container{
+.button-container {
   position: absolute;
   right: 0;
   bottom: 0;
   height: 200px;
   display: grid;
   grid-row: auto;
-  padding: 2%;
+  margin: $outer-margin;
 }
 
 .title {
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke-width: 3px;
   -webkit-text-stroke-color: $shade-10;
-
-  position: absolute;
-  margin: 0.2em 0 0 0;
-  padding: 2%;
-  width: 100%;
-
-  text-align: left;
   font-size: 4em;
-  text-transform: full-width;
+}
+
+.under-title {
+  font-style: italic;
+  font-size: 1.3em;
+  margin-top: -20px;
 }
 
 .simulation-window {
-  border-radius: 2px;
-  border-color: $shade-10;
   height: 100%;
   width: 100%;
   opacity: 50%;
   z-index: -1;
-}
-
-.panel {
-  position: absolute;
-  bottom: 0;
-  margin: 0 5em;
-  padding: 5em 0 1em 0;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  opacity: 20%;
-  transition: 500ms ease-in-out;
-
-  &:hover {
-    opacity: unset;
-  }
-
-  &__buttons {
-    margin-top: 1em;
-
-    & > * {
-      min-width: 10em;
-
-      &:not(:first-child) {
-        margin-left: 1em;
-      }
-    }
-  }
 }
 
 .button {
@@ -105,13 +74,46 @@ body {
   flex-wrap: wrap;
   justify-content: center;
 
-  & > * {
+  &>* {
     flex-basis: 30%;
   }
 }
 
-.project {
-    color: $shade-10
+.project-container {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin: $outer-margin;
+  padding: 1%;
+  background-color: $beige;
+  max-width: 80%;
+
+
+  border-radius: $border-radius;
+  border-color: $shade-10;
+  border-style: solid;
+}
+
+.about-container {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin: $outer-margin;
+  padding: 1%;
+  background-color: $beige;
+  max-width: 31%;
+
+  border-radius: $border-radius;
+  border-color: $shade-10;
+  border-style: solid;
+}
+
+.title-container {
+  position: absolute;
+  margin: $outer-margin;
+  width: 100%;
+  text-align: left;
+  text-transform: full-width;
 }
 
 // Firefox Overrides

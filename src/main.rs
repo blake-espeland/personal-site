@@ -1,23 +1,25 @@
 mod background;
 mod media;
+mod projects;
 
-use background::math::Vector2D;
 use media::button::Button;
+use media::about::AboutSection;
+use media::title::Title;
+
+use projects::container::ProjContainer;
 
 use background::settings::Settings;
 use background::simulation::Simulation;
 
-use wasm_bindgen::JsCast;
-use yew::functional::use_state_eq;
-use yew::ContextProvider;
 use yew::{html, Component, Context, Html};
+use wasm_logger;
 
-use web_sys::Window;
 pub enum Msg {
     ChangeSettings(Settings),
     ResetSettings,
     RestartSimulation,
     TogglePause,
+    ToggleAbout
 }
 
 #[derive(Clone, Debug, PartialEq)]
@@ -30,7 +32,7 @@ pub struct Model {
     settings: Settings,
     generation: usize,
     paused: bool,
-    window_size: Vector2D,
+    render_about: bool,
 }
 
 impl Component for Model {
@@ -38,21 +40,11 @@ impl Component for Model {
     type Properties = ();
 
     fn create(_ctx: &Context<Self>) -> Self {
-        let w = web_sys::window().expect("Couldn't get window element.");
         Self {
             settings: Settings::load(),
             generation: 0,
             paused: false,
-            window_size: Vector2D {
-                x: match w.inner_width() {
-                    Ok(v) => v.as_f64().expect("Couldn't get window width."),
-                    Err(_) => 1080.0,
-                },
-                y: match w.inner_height() {
-                    Ok(v) => v.as_f64().expect("Couldn't get window height."),
-                    Err(_) => 1920.0,
-                },
-            },
+            render_about: true
         }
     }
 
@@ -76,28 +68,42 @@ impl Component for Model {
                 self.paused = !self.paused;
                 true
             }
+            Msg::ToggleAbout => {
+                self.render_about = !self.render_about;
+                true
+            }
         }
     }
 
-    fn view(&self, _ctx: &Context<Self>) -> Html {
-        let w = web_sys::window().expect("Couldn't get window element.");
-
+    fn view(&self, ctx: &Context<Self>) -> Html {
         html! {
             <>
-                <h1 class="title">{ "Blake Espeland" }</h1>
+                <Title show={true}/>
                 <Simulation settings={self.settings.clone()} generation={self.generation} paused={self.paused}/>
                 <div class="button-container">
                     <Button text={"GitHub"} class={"button"} download={""} link={"https://github.com/blake-espeland/"}/>
                     <Button text={"LinkedIn"} class={"button"} download={""} link={"https://linkedin.com/in/blake-espeland/"}/>
                     <Button text={"Resume"} class={"button"} download={"Blake_Espeland_Resume.docx"} link={"resources/Blake_Espeland_Resume.docx"}/>
-                    <Button text={"Projects"} class={"button"} download={""} link={""}/>
+                    <button onclick={ctx.link().callback(|_| Msg::ToggleAbout)} class="button">{self.get_proj_btn_txt()}</button>
                 </div>
+                <ProjContainer show={!self.render_about}/>
+
+                <AboutSection show={self.render_about}/>
             </>
         }
     }
 }
-impl Model {}
+impl Model {
+    fn get_proj_btn_txt(&self) -> &str{
+        if self.render_about{
+            "Projects"
+        }else{
+            "About"
+        }
+    }
+}
 
 fn main() {
+    wasm_logger::init(wasm_logger::Config::default());
     yew::start_app::<Model>();
 }

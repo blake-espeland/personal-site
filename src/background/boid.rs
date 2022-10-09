@@ -4,8 +4,6 @@ use rand::Rng;
 use std::iter;
 use yew::{html, Html};
 
-const DEFAULT_SIZE: Vector2D = Vector2D {x: 1600.0, y: 1000.0};
-
 #[derive(Clone, Debug, PartialEq)]
 pub struct Boid {
     position: Vector2D,

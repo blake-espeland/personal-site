@@ -1,10 +1,6 @@
 use gloo::storage::{LocalStorage, Storage};
 use serde::{Deserialize, Serialize};
 
-use crate::FrameProps;
-
-use super::math::Vector2D;
-
 #[derive(Clone, Debug, PartialEq, Deserialize, Serialize)]
 pub struct Settings {
     /// amount of boids
