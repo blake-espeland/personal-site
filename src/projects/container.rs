@@ -71,17 +71,17 @@ impl Component for ProjContainer {
                 html!(
                     <div class="project-container">
                         <h1>{"Projects"}</h1>
-                        <button class="button" onclick={ctx.link().callback(|_| Msg::SprayerMods)}>{"Sprayer Mods"}</button>
-                        <button class="button" onclick={ctx.link().callback(|_| Msg::ModelForge)}>{"ModelForge"}</button>
-                        <button class="button" onclick={ctx.link().callback(|_| Msg::RNN)}>{"Rust NN"}</button>
-                        <button class="button" onclick={ctx.link().callback(|_| Msg::CurveEstimation)}>{"Curve Estimation"}</button>
+                        <a class="button" onclick={ctx.link().callback(|_| Msg::SprayerMods)}>{"Sprayer Mods"}</a>
+                        <a class="button" onclick={ctx.link().callback(|_| Msg::ModelForge)}>{"ModelForge"}</a>
+                        <a class="button" onclick={ctx.link().callback(|_| Msg::RNN)}>{"Rust NN"}</a>
+                        <a class="button" onclick={ctx.link().callback(|_| Msg::CurveEstimation)}>{"Curve Estimation"}</a>
                     </div>
                 )
             }
             _ => {
                 html!(
                 <div class="project-container">
-                    <button class="back-button" onclick={ctx.link().callback(|_| Msg::None)}>{"x"}</button>
+                    <a class="back-button" onclick={ctx.link().callback(|_| Msg::None)}>{"<"}</a>
                     {self.get_inner_html()}
                 </div>
                 )

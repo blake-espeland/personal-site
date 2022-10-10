@@ -736,16 +736,16 @@ function getImports() {
         const ret = wasm.memory;
         return addHeapObject(ret);
     };
-    imports.wbg.__wbindgen_closure_wrapper338 = function(arg0, arg1, arg2) {
-        const ret = makeMutClosure(arg0, arg1, 154, __wbg_adapter_26);
+    imports.wbg.__wbindgen_closure_wrapper333 = function(arg0, arg1, arg2) {
+        const ret = makeMutClosure(arg0, arg1, 181, __wbg_adapter_26);
         return addHeapObject(ret);
     };
-    imports.wbg.__wbindgen_closure_wrapper660 = function(arg0, arg1, arg2) {
-        const ret = makeMutClosure(arg0, arg1, 312, __wbg_adapter_29);
+    imports.wbg.__wbindgen_closure_wrapper627 = function(arg0, arg1, arg2) {
+        const ret = makeMutClosure(arg0, arg1, 289, __wbg_adapter_29);
         return addHeapObject(ret);
     };
-    imports.wbg.__wbindgen_closure_wrapper855 = function(arg0, arg1, arg2) {
-        const ret = makeMutClosure(arg0, arg1, 396, __wbg_adapter_32);
+    imports.wbg.__wbindgen_closure_wrapper814 = function(arg0, arg1, arg2) {
+        const ret = makeMutClosure(arg0, arg1, 373, __wbg_adapter_32);
         return addHeapObject(ret);
     };
 
@@ -784,7 +784,7 @@ function initSync(module) {
 
 async function init(input) {
     if (typeof input === 'undefined') {
-        input = new URL('yew-portfolio-118b849ab7b5f59b_bg.wasm', import.meta.url);
+        input = new URL('yew-portfolio-ec86bafb09ca1aa9_bg.wasm', import.meta.url);
     }
     const imports = getImports();
 

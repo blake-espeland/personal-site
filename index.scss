@@ -27,12 +27,17 @@ body {
   position: absolute;
   right: 0;
   bottom: 0;
-  height: 200px;
+  height: 33%;
+  width: auto;
   display: grid;
   grid-row: auto;
   margin: $outer-margin;
-  text-align: right;
-  max-width: 40%;
+  text-align: center;
+  max-width: 12%;
+}
+
+.icon {
+  font-size: 1.4em;
 }
 
 .title {
@@ -61,14 +66,14 @@ body {
   background: transparent;
 
   border: none;
+  padding: 5px;
 
   transition: 250ms;
-  font-size: 1.4em;
+  font-size: 1.3em;
   text-decoration: none;
 
   &:hover {
     transform: scale(1.1);
-    transform: translate3d(-5px, -5px, 5px);
     cursor: pointer;
   }
 
@@ -84,6 +89,9 @@ body {
   text-align: left;
   overflow-x: scroll;
   overflow-y: scroll;
+
+  display: grid;
+  grid-row: auto;
 
   border-radius: $border-radius;
   border-color: $shade-10;
@@ -133,8 +141,11 @@ body {
   position: sticky;
   top: 0;
   right: 0;
+  width: 25px;
+  height: 25px;
   color: $beige;
   background: $shade-10;
+  text-align: center;
 
   border: none;
   transition: 250ms;
@@ -169,6 +180,21 @@ body {
   border-radius: $border-radius;
   border-color: $shade-10;
   border-style: solid;
+}
+
+@media screen and (max-width: 520px) {
+  .side {
+      writing-mode: vertical-lr;
+  }
+
+  .project-container {
+    max-height: auto;
+    max-width: 80%;
+  }
+  .about-container {
+    max-height: auto;
+    max-width: 80%;
+  }
 }
 
 *::-webkit-scrollbar {

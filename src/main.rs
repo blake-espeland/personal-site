@@ -2,7 +2,6 @@ mod background;
 mod media;
 mod projects;
 
-use media::button::Button;
 use media::about::AboutSection;
 use media::title::Title;
 
@@ -11,15 +10,15 @@ use projects::container::ProjContainer;
 use background::settings::Settings;
 use background::simulation::Simulation;
 
-use yew::{html, Component, Context, Html};
 use wasm_logger;
+use yew::{html, Component, Context, Html};
 
 pub enum Msg {
     ChangeSettings(Settings),
     ResetSettings,
     RestartSimulation,
     TogglePause,
-    ToggleAbout
+    ToggleAbout,
 }
 
 #[derive(Clone, Debug, PartialEq)]
@@ -44,7 +43,7 @@ impl Component for Model {
             settings: Settings::load(),
             generation: 0,
             paused: false,
-            render_about: true
+            render_about: true,
         }
     }
 
@@ -80,14 +79,17 @@ impl Component for Model {
             <>
                 <Title show={true}/>
                 <Simulation settings={self.settings.clone()} generation={self.generation} paused={self.paused}/>
-
+                
                 <div class="button-container">
-                    <Button text={"GitHub"} class={"button"} download={""} link={"https://github.com/blake-espeland/"}/>
-                    <Button text={"LinkedIn"} class={"button"} download={""} link={"https://linkedin.com/in/blake-espeland/"}/>
-                    <Button text={"Resume"} class={"button"} download={"Blake_Espeland_Resume.docx"} link={"resources/Blake_Espeland_Resume.docx"}/>
-                    <a onclick={ctx.link().callback(|_| Msg::ToggleAbout)} class="button">{self.get_proj_btn_txt()}</a>
-                    <a onclick={ctx.link().callback(|_| Msg::TogglePause)} class="button">{self.get_pause_play_txt()}</a>
+                <a onclick={ctx.link().callback(|_| Msg::ToggleAbout)} class="side button">{self.get_proj_btn_txt()}</a>
+                <a class="button" href="https://github.com/blake-espeland/">{self.get_linkedin_icon()}</a>
+                <a class="button" href="https://linkedin.com/in/blake-espeland/">{self.get_github_icon()}</a>
+                <a class="button" download="Blake_Espeland_Resume.docx" href="resources/Blake_Espeland_Resume.docx" title="Download Resume">
+                {self.get_resume_icon()}
+                </a>
+                <a onclick={ctx.link().callback(|_| Msg::TogglePause)} class="button">{self.get_pause_play()}</a>
                 </div>
+
                 <ProjContainer show={!self.render_about}/>
                 <AboutSection show={self.render_about}/>
             </>
@@ -95,19 +97,29 @@ impl Component for Model {
     }
 }
 impl Model {
-    fn get_proj_btn_txt(&self) -> &str{
-        if self.render_about{
-            "Projects •"
-        }else{
-            "About •"
+    fn get_proj_btn_txt(&self) -> &str {
+        if self.render_about {
+            "Projects"
+        } else {
+            "About"
         }
     }
-    fn get_pause_play_txt(&self) -> &str{
-        if self.paused{
-            "Play Boids •"
-        }else{
-            "Pause Boids •"
+    fn get_pause_play(&self) -> Html {
+        if self.paused {
+            html!(<i class="fa fa-play icon" aria-hidden="true"></i>)
+        } else {
+            html!(<i class="fa fa-pause icon" aria-hidden="true"></i>)
         }
+    }
+
+    fn get_linkedin_icon(&self) -> Html {
+        html!(<i class="fa-brands fa-linkedin icon"></i>)
+    }
+    fn get_github_icon(&self) -> Html {
+        html!(<i class="fa-brands fa-github icon"></i>)
+    }
+    fn get_resume_icon(&self) -> Html {
+        html!(<i class="fa-solid fa-file-arrow-down icon"></i>)
     }
 }
 
