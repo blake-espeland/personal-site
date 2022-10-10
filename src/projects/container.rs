@@ -1,10 +1,15 @@
 use yew::prelude::*;
 
+use crate::Model;
 
+use super::curve_est::CurveEstimation;
+use super::model_forge::ModelForge;
+use super::rnn::RNN;
+use super::sprayer_mods::SprayerMods;
 
-pub struct ProjContainer{
+pub struct ProjContainer {
     pub render: bool,
-    proj_highlight: Msg
+    proj_highlight: Msg,
 }
 
 #[derive(Properties, PartialEq)]
@@ -13,27 +18,28 @@ pub struct ProjContainerProps {
 }
 
 #[derive(PartialEq)]
-pub enum Msg{
+pub enum Msg {
     None,
     SprayerMods,
     ModelForge,
     RNN,
-    CurveEstimation
+    CurveEstimation,
 }
 
-impl Component for ProjContainer{
+impl Component for ProjContainer {
     type Properties = ProjContainerProps;
     type Message = Msg;
-    
+
     fn create(ctx: &Context<Self>) -> Self {
         Self {
             render: ctx.props().show,
-            proj_highlight: Msg::None
+            proj_highlight: Msg::None,
         }
     }
 
     fn changed(&mut self, _ctx: &Context<Self>, _p: &ProjContainerProps) -> bool {
         self.render = !self.render;
+        self.proj_highlight = Msg::None;
         true
     }
 
@@ -41,13 +47,13 @@ impl Component for ProjContainer{
         match msg {
             Msg::SprayerMods => {
                 self.proj_highlight = Msg::SprayerMods;
-            },
+            }
             Msg::ModelForge => {
                 self.proj_highlight = Msg::ModelForge;
-            },
+            }
             Msg::RNN => {
                 self.proj_highlight = Msg::RNN;
-            },
+            }
             Msg::CurveEstimation => {
                 self.proj_highlight = Msg::CurveEstimation;
             }
@@ -59,17 +65,56 @@ impl Component for ProjContainer{
     }
 
     fn view(&self, ctx: &Context<Self>) -> Html {
-        html!(
-            if !self.render{}
-            else{
-            <div class="project-container">
-                <h2 class="project-h2">{"Projects"}</h2>
-                <button class="button" onclick={ctx.link().callback(|_| Msg::SprayerMods)}>{"• Sprayer Mods"}</button>
-                <button class="button" onclick={ctx.link().callback(|_| Msg::ModelForge)}>{"• ModelForge"}</button>
-                <button class="button" onclick={ctx.link().callback(|_| Msg::RNN)}>{"• r_nn"}</button>
-                <button class="button" onclick={ctx.link().callback(|_| Msg::CurveEstimation)}>{"• Curve Estimation"}</button>
-            </div>
+        if !self.render {
+            return html!();
+        }
+
+        match self.proj_highlight {
+            Msg::None => {
+                html!(
+                <div class="o-project-container">
+                    <div class="project-container">
+                        <h1>{"Projects"}</h1>
+                        <button class="button" onclick={ctx.link().callback(|_| Msg::SprayerMods)}>{"Sprayer Mods"}</button>
+                        <button class="button" onclick={ctx.link().callback(|_| Msg::ModelForge)}>{"ModelForge"}</button>
+                        <button class="button" onclick={ctx.link().callback(|_| Msg::RNN)}>{"Rust NN"}</button>
+                        <button class="button" onclick={ctx.link().callback(|_| Msg::CurveEstimation)}>{"Curve Estimation"}</button>
+                    </div>
+                </div>
+                )
             }
-        )
+            _ => {
+                html!(
+                    <div class="o-project-container">
+                        <button class="button" onclick={ctx.link().callback(|_| Msg::None)}>{"back"}</button>
+                        <div class="project-container">
+                            {self.get_inner_html()}
+                        </div>
+                    </div>
+                )
+            }
+        }
+    }
+}
+
+impl ProjContainer {
+    fn get_inner_html(&self) -> Html {
+        match self.proj_highlight {
+            Msg::SprayerMods => {
+                html!(<SprayerMods/>)
+            }
+            Msg::ModelForge => {
+                html!(<ModelForge/>)
+            }
+            Msg::RNN => {
+                html!(<RNN/>)
+            }
+            Msg::CurveEstimation => {
+                html!(<CurveEstimation/>)
+            }
+            _ => {
+                html!()
+            }
+        }
     }
 }

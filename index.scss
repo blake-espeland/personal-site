@@ -6,17 +6,10 @@ $teal: #1abc9c !default;
 $beige: #F8EDE3;
 // $box-shadow:
 $outer-margin: 3%;
-$border-radius: 5px;
+$border-radius: 0px;
 $inner-padding: 1%;
 $media-max-ht: 63%;
 $media-max-wd: 50%;
-
-@media only screen and (max-width: 500px) {
-  html,
-  body{
-    overflow: scroll;
-  }
-}
 
 html,
 body {
@@ -75,7 +68,7 @@ body {
 
   &:hover {
     transform: scale(1.1);
-    transform: translate3d(-10px, -10px, 10px);
+    transform: translate3d(-5px, -5px, 5px);
     cursor: pointer;
   }
 
@@ -85,29 +78,65 @@ body {
 }
 
 .project-container {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  margin: $outer-margin;
   padding: $inner-padding;
-
   background-color: $beige;
+  position:static;
 
-  max-width: $media-max-wd;
-  max-height: $media-max-ht;
+  width: 100%;
+  height: 100%;
 
-  text-align: center;
-  scrollbar-width: 2px;
-  
-  overflow: auto;
+  text-align: left;
+  overflow-x: scroll;
   overflow-y: scroll;
 
   border-radius: $border-radius;
   border-color: $shade-10;
   border-style: solid;
+  border-width: 2px;
+}
+
+.project-container img{
+  position: relative;
+  max-width: 100%;
+
+  border-radius: 2px;
+  border-style:solid;
+  border-color: $shade-10;
+}
+
+.project-container h1 {
+  font-style: italic;
+  font-size: 1.5em;
+  margin-left: 1%
+}
+
+.project-container h2 {
+  font-style: italic;
+  font-size: 1.2em;
+  margin-left: 1%
+}
+
+.project-container .inner-p{
+  text-decoration: none;
+  font-weight: bold;
+  color: $shade-10
+}
+
+.o-project-container {
+  display:block;
+  max-width: $media-max-wd;
+  max-height: $media-max-ht;
+  position: absolute;
+
+  left: 0;
+  bottom: 0;
+
+  margin: $outer-margin;
 }
 
 .about-container {
+  max-width: $media-max-wd;
+  max-height: $media-max-ht;
   position: absolute;
   left: 0;
   bottom: 0;
@@ -115,9 +144,6 @@ body {
   padding: $inner-padding;
 
   background-color: $beige;
-
-  max-width: $media-max-wd;
-  max-height: $media-max-ht;
 
   overflow: auto;
   overflow-y: scroll;
