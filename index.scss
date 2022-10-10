@@ -80,10 +80,6 @@ body {
 .project-container {
   padding: $inner-padding;
   background-color: $beige;
-  position:static;
-
-  width: 100%;
-  height: 100%;
 
   text-align: left;
   overflow-x: scroll;
@@ -93,6 +89,15 @@ body {
   border-color: $shade-10;
   border-style: solid;
   border-width: 2px;
+
+  max-width: $media-max-wd;
+  max-height: $media-max-ht;
+  position: absolute;
+
+  left: 0;
+  bottom: 0;
+
+  margin: $outer-margin;
 }
 
 .project-container img{
@@ -122,16 +127,29 @@ body {
   color: $shade-10
 }
 
-.o-project-container {
-  display:block;
-  max-width: $media-max-wd;
-  max-height: $media-max-ht;
-  position: absolute;
+.back-button {
+  z-index: 10;
 
-  left: 0;
-  bottom: 0;
+  position: sticky;
+  top: 0;
+  right: 0;
+  color: $beige;
+  background: $shade-10;
 
-  margin: $outer-margin;
+  border: none;
+  transition: 250ms;
+  font-size: 1.4em;
+  text-decoration: none;
+
+  &:hover {
+    transform: scale(1.1);
+    transform: translate3d(-2px, -2px, 2px);
+    cursor: pointer;
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
 }
 
 .about-container {

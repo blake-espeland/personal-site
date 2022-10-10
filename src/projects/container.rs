@@ -1,7 +1,4 @@
 use yew::prelude::*;
-
-use crate::Model;
-
 use super::curve_est::CurveEstimation;
 use super::model_forge::ModelForge;
 use super::rnn::RNN;
@@ -72,7 +69,6 @@ impl Component for ProjContainer {
         match self.proj_highlight {
             Msg::None => {
                 html!(
-                <div class="o-project-container">
                     <div class="project-container">
                         <h1>{"Projects"}</h1>
                         <button class="button" onclick={ctx.link().callback(|_| Msg::SprayerMods)}>{"Sprayer Mods"}</button>
@@ -80,17 +76,14 @@ impl Component for ProjContainer {
                         <button class="button" onclick={ctx.link().callback(|_| Msg::RNN)}>{"Rust NN"}</button>
                         <button class="button" onclick={ctx.link().callback(|_| Msg::CurveEstimation)}>{"Curve Estimation"}</button>
                     </div>
-                </div>
                 )
             }
             _ => {
                 html!(
-                    <div class="o-project-container">
-                        <button class="button" onclick={ctx.link().callback(|_| Msg::None)}>{"back"}</button>
-                        <div class="project-container">
-                            {self.get_inner_html()}
-                        </div>
-                    </div>
+                <div class="project-container">
+                    <button class="back-button" onclick={ctx.link().callback(|_| Msg::None)}>{"x"}</button>
+                    {self.get_inner_html()}
+                </div>
                 )
             }
         }
