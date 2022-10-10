@@ -8,6 +8,15 @@ $beige: #F8EDE3;
 $outer-margin: 3%;
 $border-radius: 5px;
 $inner-padding: 1%;
+$media-max-ht: 63%;
+$media-max-wd: 50%;
+
+@media only screen and (max-width: 500px) {
+  html,
+  body{
+    overflow: scroll;
+  }
+}
 
 html,
 body {
@@ -20,6 +29,7 @@ body {
   overflow: hidden;
 }
 
+
 .button-container {
   position: absolute;
   right: 0;
@@ -28,7 +38,8 @@ body {
   display: grid;
   grid-row: auto;
   margin: $outer-margin;
-  text-align: left;
+  text-align: right;
+  max-width: 40%;
 }
 
 .title {
@@ -52,31 +63,9 @@ body {
   z-index: -1;
 }
 
-.pbutton {
-  color: $shade-2;
-  background: transparent;
-  padding: 0.5em 2em;
-
-  border: none;
-
-  transition: 250ms;
-  font-size: 1.4em;
-  text-decoration: none;
-
-  &:hover {
-    transform: scale(1.1);
-    transform: translate3d(-10px, -10px, 10px);
-  }
-
-  &:active {
-    transform: scale(0.9);
-  }
-}
-
 .button {
   color: $shade-10;
   background: transparent;
-  padding: 0.5em 2em;
 
   border: none;
 
@@ -87,20 +76,11 @@ body {
   &:hover {
     transform: scale(1.1);
     transform: translate3d(-10px, -10px, 10px);
+    cursor: pointer;
   }
 
   &:active {
     transform: scale(0.9);
-  }
-}
-
-.settings {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-
-  &>* {
-    flex-basis: 30%;
   }
 }
 
@@ -110,10 +90,17 @@ body {
   bottom: 0;
   margin: $outer-margin;
   padding: $inner-padding;
+
   background-color: $beige;
-  max-width: 50%;
-  transition: 250ms;
+
+  max-width: $media-max-wd;
+  max-height: $media-max-ht;
+
   text-align: center;
+  scrollbar-width: 2px;
+  
+  overflow: auto;
+  overflow-y: scroll;
 
   border-radius: $border-radius;
   border-color: $shade-10;
@@ -126,13 +113,26 @@ body {
   bottom: 0;
   margin: $outer-margin;
   padding: $inner-padding;
+
   background-color: $beige;
-  max-width: 31%;
-  transition: 250ms;
+
+  max-width: $media-max-wd;
+  max-height: $media-max-ht;
+
+  overflow: auto;
+  overflow-y: scroll;
 
   border-radius: $border-radius;
   border-color: $shade-10;
   border-style: solid;
+}
+
+*::-webkit-scrollbar {
+  width: 6px; /* Mostly for vertical scrollbars */
+  height: 6px;
+}
+*::-webkit-scrollbar-thumb {
+  background: $shade-10;
 }
 
 .title-container {

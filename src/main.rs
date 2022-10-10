@@ -14,8 +14,6 @@ use background::simulation::Simulation;
 use yew::{html, Component, Context, Html};
 use wasm_logger;
 
-use gloo::console::log;
-
 pub enum Msg {
     ChangeSettings(Settings),
     ResetSettings,
@@ -72,7 +70,6 @@ impl Component for Model {
             }
             Msg::ToggleAbout => {
                 self.render_about = !self.render_about;
-                log!("render_about: {}", self.render_about);
                 true
             }
         }
@@ -83,12 +80,13 @@ impl Component for Model {
             <>
                 <Title show={true}/>
                 <Simulation settings={self.settings.clone()} generation={self.generation} paused={self.paused}/>
+
                 <div class="button-container">
                     <Button text={"GitHub"} class={"button"} download={""} link={"https://github.com/blake-espeland/"}/>
                     <Button text={"LinkedIn"} class={"button"} download={""} link={"https://linkedin.com/in/blake-espeland/"}/>
                     <Button text={"Resume"} class={"button"} download={"Blake_Espeland_Resume.docx"} link={"resources/Blake_Espeland_Resume.docx"}/>
-                    <button onclick={ctx.link().callback(|_| Msg::ToggleAbout)} class="pbutton">{self.get_proj_btn_txt()}</button>
-                    <button onclick={ctx.link().callback(|_| Msg::TogglePause)} class="button">{self.get_pause_play_txt()}</button>
+                    <a onclick={ctx.link().callback(|_| Msg::ToggleAbout)} class="button">{self.get_proj_btn_txt()}</a>
+                    <a onclick={ctx.link().callback(|_| Msg::TogglePause)} class="button">{self.get_pause_play_txt()}</a>
                 </div>
                 <ProjContainer show={!self.render_about}/>
                 <AboutSection show={self.render_about}/>
@@ -99,16 +97,16 @@ impl Component for Model {
 impl Model {
     fn get_proj_btn_txt(&self) -> &str{
         if self.render_about{
-            "Projects"
+            "Projects •"
         }else{
-            "About"
+            "About •"
         }
     }
     fn get_pause_play_txt(&self) -> &str{
         if self.paused{
-            "Play Boids"
+            "Play Boids •"
         }else{
-            "Pause Boids"
+            "Pause Boids •"
         }
     }
 }

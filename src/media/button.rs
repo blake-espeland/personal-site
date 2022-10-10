@@ -30,11 +30,11 @@ impl Component for Button{
     fn view(&self, ctx: &Context<Self>) -> Html {
         if !self.download.is_empty(){
             html! (
-                <a href={self.link.clone()} class={&ctx.props().class} download={self.download.clone()}>{self.text.clone()}</a>
+                <a href={self.link.clone()} class={&ctx.props().class} download={self.download.clone()}>{self.text.clone()}{" •"}</a>
             )
         }else{
             html! (
-                <a href={self.link.clone()} class={&ctx.props().class}>{self.text.clone()}</a>
+                <a href={self.link.clone()} class={&ctx.props().class}>{self.text.clone()}{" •"}</a>
             )
         }
     }

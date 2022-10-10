@@ -7,7 +7,7 @@ pub struct AboutSectionProps{
 }
 
 pub struct AboutSection{
-    pub rendered: bool
+    pub render: bool
 }
 
 
@@ -17,18 +17,18 @@ impl Component for AboutSection{
 
     fn create(ctx: &Context<Self>) -> Self {
         Self {
-            rendered: ctx.props().show
+            render: ctx.props().show
         }
     }
 
     fn changed(&mut self, _ctx: &Context<Self>, _p: &AboutSectionProps) -> bool {
-        self.rendered = !self.rendered;
+        self.render = !self.render;
         true
     }
 
     fn view(&self, _ctx: &Context<Self>) -> Html {
         html! (
-        if !self.rendered {}
+        if !self.render {}
         else{
             <div class={"about-container"}>
                 <p class={"about-text"}>
@@ -37,6 +37,7 @@ impl Component for AboutSection{
                 </p>
                 <p class={"about-text"}>{"Other topics of interest include mathematics, physics, and art."}</p>
                 <p class={"about-text"}>{"In my free time, I enjoy being outside. But if it's too inclement, I'll be inside reading or playing video games."}</p>
+                <p class={"about-text"}>{"Feel free to check out my projects highlighted on this page. For more, check out my LinkedIn or GitHub."}</p>
             </div>
         }
         )
