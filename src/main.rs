@@ -82,8 +82,8 @@ impl Component for Model {
                 
                 <div class="button-container">
                 <a onclick={ctx.link().callback(|_| Msg::ToggleAbout)} class="side button">{self.get_proj_btn_txt()}</a>
-                <a class="button" href="https://github.com/blake-espeland/">{self.get_linkedin_icon()}</a>
-                <a class="button" href="https://linkedin.com/in/blake-espeland/">{self.get_github_icon()}</a>
+                <a class="button" href="https://linkedin.com/in/blake-espeland/">{self.get_linkedin_icon()}</a>
+                <a class="button" href="https://github.com/blake-espeland/">{self.get_github_icon()}</a>
                 <a class="button" download="Blake_Espeland_Resume.docx" href="resources/Blake_Espeland_Resume.docx" title="Download Resume">
                 {self.get_resume_icon()}
                 </a>

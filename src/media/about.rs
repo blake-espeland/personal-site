@@ -31,7 +31,7 @@ impl Component for AboutSection{
         if !self.render {}
         else{
             <div class={"project-container"}>
-                <h1>{"Re:"}</h1>
+                <h1>{"About"}</h1>
                 <p class={"about-text"}>
                     {"I am a passionate developer and engineer with interests at every level of abstraction. I enjoy low-level, embedded programming; large-scale 
                         application development; visual and human-based design; and machine learning."}
