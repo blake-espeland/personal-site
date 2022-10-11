@@ -32,7 +32,7 @@ body {
   position: absolute;
   right: 0;
   bottom: 0;
-  height: 30%;
+  height: auto;
   width: auto;
   display: grid;
   grid-row: auto;
@@ -93,7 +93,7 @@ body {
   background-color: $beige;
 
   text-align: left;
-  overflow-x: scroll;
+  overflow-x: hidden;
   overflow-y: scroll;
 
   display: grid;
@@ -127,12 +127,18 @@ body {
   z-index: 8;
 
   position: sticky;
-  top: -4%;
-  right: 0;
-  width: 104%;
+  top: 0;
+
   height: auto;
+  width: 33%;
+  margin: 0 auto;
+
   text-align: center;
   background-color: $beige;
+
+  border-radius: $border-radius;
+  border-color: $shade-10;
+  border-style: solid;
 }
 
 .head-container h1 {
@@ -222,7 +228,10 @@ body {
 
 @media screen and (max-width: 400px) {
   .under-title {
-    display: none;
+      position: absolute;
+      top: 0;
+      font-size: 1.3em;
+      margin-top: -20px;
   }
 }
 
