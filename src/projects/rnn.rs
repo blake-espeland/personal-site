@@ -14,7 +14,9 @@ impl Component for RNN{
     fn view(&self, _ctx: &Context<Self>) -> Html {
         html!(
             <>
-                <h1>{"Rust NN"}</h1>
+                <div class="head-container">
+                    <h1>{"Rust NN"}</h1>
+                </div>
                 <h2>{"A neural network API written in Rust"}</h2>
                 <p>{"This project is currently in progress as I continue learning the ins and outs of the Rust programming
                      language. The end goal is to create an API with similar syntax and tooling to PyTorch. I have no 

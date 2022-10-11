@@ -14,7 +14,9 @@ impl Component for ModelForge{
     fn view(&self, _ctx: &Context<Self>) -> Html {
         html!(
             <>
-                <h1><a class="inner-p" href={"https://github.com/Sprayer-Mods/ModelForge"}>{"Model Forge"}</a></h1>
+                <div class="head-container">
+                    <h1><a class="inner-p" href={"https://github.com/Sprayer-Mods/ModelForge"}>{"Model Forge"}</a></h1>
+                </div>
 
                 <p>
                     {"A part of the Sprayer Mods project. In order to detect weeds, 

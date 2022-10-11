@@ -123,6 +123,23 @@ body {
   border-color: $shade-10;
 }
 
+.head-container {
+  z-index: 8;
+
+  position: sticky;
+  top: -4%;
+  right: 0;
+  width: 104%;
+  height: auto;
+  text-align: center;
+  background-color: $beige;
+}
+
+.head-container h1 {
+  font-style: italic;
+  font-size: 1.5em;
+}
+
 .project-container h1 {
   font-style: italic;
   font-size: 1.5em;

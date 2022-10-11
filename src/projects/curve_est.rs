@@ -14,7 +14,9 @@ impl Component for CurveEstimation{
     fn view(&self, _ctx: &Context<Self>) -> Html {
         html!(
             <>
-                <h1>{"Curve Estimation"}</h1>
+                <div class="head-container">
+                    <h1>{"Curve Estimation"}</h1>
+                </div>
                 <h2>{"A final project for CS:5430 - Machine Learning."}</h2>
                 <p>{"In this project, my partner, Leodona Odole, and I created an application that takes in an
                      image of a row crop field as input, and outputs the coefficients of a fitted polynomial. The polynomial

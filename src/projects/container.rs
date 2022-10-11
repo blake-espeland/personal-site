@@ -70,7 +70,7 @@ impl Component for ProjContainer {
             Msg::None => {
                 html!(
                     <div class="project-container">
-                        <h1>{"Select Projects"}</h1>
+                        <h1>{"Selected Projects"}</h1>
                         <a class="button" onclick={ctx.link().callback(|_| Msg::SprayerMods)}>{"Sprayer Mods"}</a>
                         <a class="button" onclick={ctx.link().callback(|_| Msg::ModelForge)}>{"ModelForge"}</a>
                         <a class="button" onclick={ctx.link().callback(|_| Msg::RNN)}>{"Rust NN"}</a>
