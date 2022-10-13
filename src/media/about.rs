@@ -39,6 +39,8 @@ impl Component for AboutSection{
                 <p class={"about-text"}>{"Other topics of interest include mathematics, physics, and art."}</p>
                 <p class={"about-text"}>{"In my free time, I enjoy being outside. But if it's too inclement, I'll be inside reading or playing video games."}</p>
                 <p class={"about-text"}>{"Feel free to check out my projects highlighted on this page. For more, check out my LinkedIn or GitHub."}</p>
+                <p class={"about-text"}>{"This website was made using the Yew frontend framework for the Rust programming language."}</p>
+                <small>{"2022 - Made with "}<i class="fa-regular fa-heart"></i>{" and Rust "}</small>
             </div>
         }
         )

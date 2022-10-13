@@ -232,6 +232,10 @@ body {
   }
 }
 
+small {
+  color: $shade-10;
+}
+
 
 *::-webkit-scrollbar {
   width: 6px; /* Mostly for vertical scrollbars */
