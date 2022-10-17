@@ -28,7 +28,7 @@ impl Component for SprayerMods{
                      on a sprayer."}</p>
                 <img src="resources/full-system.jpg"/>
                 <p>{"I joined early on in the development of the startup, so I had a large roll in designing
-                     and implementing anything techonlogical. Along with that, I competed in pitch competitions
+                     and implementing anything technological. Along with that, I competed in pitch competitions
                      and various fundraising events, where I improved my public speaking skills and earned some free money."}</p>
                 <img src="resources/pitch1.jpg"/>
                 <img src="resources/pitch2.jpg"/>

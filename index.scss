@@ -5,7 +5,7 @@ $shade-10: #2c3e50 !default;
 $teal: #1abc9c !default;
 $beige: #F8EDE3;
 // $box-shadow:
-$outer-margin: 3%;
+$outer-margin: 3vmin;
 $border-radius: 0px;
 $inner-padding: 1%;
 $media-max-ht: 63%;
@@ -56,7 +56,7 @@ body {
 .under-title {
   font-style: italic;
   font-size: 1.3em;
-  margin-top: -20px;
+  margin: auto;
 }
 
 .simulation-window {
@@ -228,6 +228,38 @@ body {
   }
   .about-container {
     max-height: auto;
+    max-width: 80%;
+  }
+}
+
+@media screen and (max-height: 670px) {
+  .under-title {
+    position: absolute;
+    top: 0;
+    font-size: 1.3em;
+    margin-top: 10px;
+  }
+}
+
+@media screen and (max-height: 550px) {
+  .title {
+    font-size: 2.71em;
+  }
+  .under-title {
+    position: absolute;
+    top: 0;
+    font-size: 1.3em;
+    margin-top: 10px;
+  }
+  .side {
+    writing-mode: vertical-lr;
+  }
+  .project-container {
+    max-height: 60%;
+    max-width: 80%;
+  }
+  .about-container {
+    max-height: 60%;
     max-width: 80%;
   }
 }

@@ -39,7 +39,7 @@ impl Component for ModelForge{
                     <li>{"Video + sequential data loading"}</li>
                     <li>{"Video + sequential training"}</li>
                     <li>{"OpenVINO quantization"}</li>
-                    <li>{"Time Shift Module"}</li>
+                    <li>{"Time Shift Module -> "} <a class="inner-p" href={"https://arxiv.org/abs/1811.08383"}>{"arxiv Report"}</a></li>
                 </ul>
             </>
 
