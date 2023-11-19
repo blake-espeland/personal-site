@@ -33,10 +33,10 @@ impl Component for AboutSection{
             <div class={"project-container"}>
                 <h1>{"About"}</h1>
                 <p class={"about-text"}>
-                    {"I am a passionate developer and engineer with interests at every level of abstraction. I enjoy low-level, embedded programming; large-scale 
+                    {"Hello! I'm a software engineer with interests at every level of abstraction. I enjoy low-level, embedded programming; large-scale 
                         application development; visual and human-based design; and machine learning."}
                 </p>
-                <p class={"about-text"}>{"Other topics of interest include mathematics, physics, and art."}</p>
+                <p class={"about-text"}>{"Other topics of interest include math, physics, history, philosphy, and art."}</p>
                 <p class={"about-text"}>{"In my free time, I enjoy being outside. But if it's too inclement, I'll be inside reading or playing video games."}</p>
                 <p class={"about-text"}>{"Feel free to check out my projects highlighted on this page. For more, check out my LinkedIn or GitHub."}</p>
                 <p class={"about-text"}>{"This website was made using the Yew frontend framework for the Rust programming language."}</p>

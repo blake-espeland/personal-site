@@ -6,18 +6,12 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-anyhow = "1.0"
+anyhow = "1.0.75"
 getrandom = { version = "0.2", features = ["js"] }
 rand = "0.8"
 serde = { version = "1.0", features = ["derive"] }
-yew = { git = "https://github.com/yewstack/yew", branch = "master", features = ["csr"] }
+yew = { version = "0.21.0", features = ["csr"] }
 gloo = "0.4"
-stdweb = "0.4.20"
-wasm-bindgen = "0.2.83"
+wasm-bindgen = "0.2.88"
 wasm-logger = "0.2.0"
-
-[dependencies.web-sys]
-version = "0.3.60"
-features = [
-	"HtmlInputElement",
-]
+web-sys = {version = "0.3.65", features = ["HtmlInputElement"]}

@@ -4,29 +4,28 @@ use rand::Rng;
 use std::iter;
 use yew::{html, Html};
 
+const BOID_RAD: f64 = 3.0;
+
 #[derive(Clone, Debug, PartialEq)]
 pub struct Boid {
     position: Vector2D,
     velocity: Vector2D,
-    radius: f64,
 }
+
 
 impl Boid {
     pub fn new_random(settings: &Settings, bounds: &Vector2D) -> Self {
         let mut rng = rand::thread_rng();
 
-        let radius = 2.0;
-
         Self {
             position: Vector2D::new(rng.gen::<f64>() * bounds.x, rng.gen::<f64>() * bounds.y),
             velocity: Vector2D::from_polar(rng.gen::<f64>() * math::TAU, settings.max_speed),
-            radius,
         }
     }
 
     fn coherence(&self, boids: VisibleBoidIter, factor: f64) -> Vector2D {
         Vector2D::weighted_mean(
-            boids.map(|other| (other.boid.position, other.boid.radius * other.boid.radius)),
+            boids.map(|other| (other.boid.position, BOID_RAD * BOID_RAD)),
         )
         .map(|mean| (mean - self.position) * factor)
         .unwrap_or_default()
@@ -51,29 +50,24 @@ impl Boid {
             .unwrap_or_default()
     }
 
-    fn keep_in_bounds(&mut self, settings: &Settings, new_bounds: &Vector2D) {
-        let min = Vector2D { x: 0.0, y: 0.0 };
-        let max = new_bounds.clone();
-
-        let mut v = Vector2D::default();
-
-        let turn_speed = self.velocity.magnitude() * settings.turn_speed_ratio;
-        let pos = self.position;
-        if pos.x < min.x {
-            v.x += turn_speed;
+    fn keep_in_bounds(&mut self, new_bounds: &Vector2D) {
+        if self.position.x <= 0.0 {
+            self.velocity.x = -self.velocity.x;
+            self.position.x = 0.0;
         }
-        if pos.x > max.x {
-            v.x -= turn_speed
+        if self.position.x >= new_bounds.x {
+            self.velocity.x = -self.velocity.x;
+            self.position.x = new_bounds.x;
         }
 
-        if pos.y < min.y {
-            v.y += turn_speed;
+        if self.position.y <= 0.0 {
+            self.velocity.y = -self.velocity.y;
+            self.position.y = 0.0;
         }
-        if pos.y > max.y {
-            v.y -= turn_speed;
+        if self.position.y >= new_bounds.y {
+            self.velocity.y = -self.velocity.y;
+            self.position.y = new_bounds.y;
         }
-
-        self.velocity += v;
     }
 
     fn update_velocity(&mut self, settings: &Settings, boids: VisibleBoidIter) {
@@ -86,7 +80,7 @@ impl Boid {
 
     fn update(&mut self, settings: &Settings, boids: VisibleBoidIter, new_bounds: &Vector2D) {
         self.update_velocity(settings, boids);
-        self.keep_in_bounds(settings, new_bounds);
+        self.keep_in_bounds(new_bounds);
         self.position += self.velocity;
     }
 
@@ -102,12 +96,10 @@ impl Boid {
     }
 
     pub fn render(&self) -> Html {
-        let color = "#2c3e50";
-
-        let cx = format!("{}", self.position.x);
-        let cy = format!("{}", self.position.y);
-        let radius = format!("{}", self.radius);
-        html! { <circle cx={cx} cy={cy} r={radius} fill={color} /> }
+        let cx = format!("{}", self.position.x as i32);
+        let cy = format!("{}", self.position.y as i32);
+        let radius = format!("{}", BOID_RAD as i32);
+        html! { <circle cx={cx} cy={cy} r={radius} class="boid"/> }
     }
 }
 
@@ -126,6 +118,7 @@ struct VisibleBoidIter<'boid> {
     position: Vector2D,
     visible_range: f64,
 }
+
 impl<'boid> VisibleBoidIter<'boid> {
     fn new(
         before: &'boid [Boid],
@@ -140,6 +133,7 @@ impl<'boid> VisibleBoidIter<'boid> {
         }
     }
 }
+
 impl<'boid> Iterator for VisibleBoidIter<'boid> {
     type Item = VisibleBoid<'boid>;
 

@@ -1,12 +1,12 @@
-use yew::prelude::*;
+use super::cepa::CEPA;
 use super::curve_est::CurveEstimation;
 use super::model_forge::ModelForge;
-use super::rnn::RNN;
 use super::sprayer_mods::SprayerMods;
+use yew::prelude::*;
 
 pub struct ProjContainer {
     pub render: bool,
-    proj_highlight: Msg,
+    proj_highlight: Proj,
 }
 
 #[derive(Properties, PartialEq)]
@@ -15,47 +15,47 @@ pub struct ProjContainerProps {
 }
 
 #[derive(PartialEq)]
-pub enum Msg {
+pub enum Proj {
     None,
     SprayerMods,
     ModelForge,
-    RNN,
+    CEPA,
     CurveEstimation,
 }
 
 impl Component for ProjContainer {
     type Properties = ProjContainerProps;
-    type Message = Msg;
+    type Message = Proj;
 
     fn create(ctx: &Context<Self>) -> Self {
         Self {
             render: ctx.props().show,
-            proj_highlight: Msg::None,
+            proj_highlight: Proj::None,
         }
     }
 
     fn changed(&mut self, _ctx: &Context<Self>, _p: &ProjContainerProps) -> bool {
         self.render = !self.render;
-        self.proj_highlight = Msg::None;
+        self.proj_highlight = Proj::None;
         true
     }
 
     fn update(&mut self, _ctx: &Context<Self>, msg: Self::Message) -> bool {
         match msg {
-            Msg::SprayerMods => {
-                self.proj_highlight = Msg::SprayerMods;
+            Proj::SprayerMods => {
+                self.proj_highlight = Proj::SprayerMods;
             }
-            Msg::ModelForge => {
-                self.proj_highlight = Msg::ModelForge;
+            Proj::ModelForge => {
+                self.proj_highlight = Proj::ModelForge;
             }
-            Msg::RNN => {
-                self.proj_highlight = Msg::RNN;
+            Proj::CEPA => {
+                self.proj_highlight = Proj::CEPA;
             }
-            Msg::CurveEstimation => {
-                self.proj_highlight = Msg::CurveEstimation;
+            Proj::CurveEstimation => {
+                self.proj_highlight = Proj::CurveEstimation;
             }
-            Msg::None => {
-                self.proj_highlight = Msg::None;
+            Proj::None => {
+                self.proj_highlight = Proj::None;
             }
         }
         true
@@ -67,21 +67,21 @@ impl Component for ProjContainer {
         }
 
         match self.proj_highlight {
-            Msg::None => {
+            Proj::None => {
                 html!(
                     <div class="project-container">
                         <h1>{"Selected Projects"}</h1>
-                        <a class="button" onclick={ctx.link().callback(|_| Msg::SprayerMods)}>{"Sprayer Mods"}</a>
-                        <a class="button" onclick={ctx.link().callback(|_| Msg::ModelForge)}>{"ModelForge"}</a>
-                        <a class="button" onclick={ctx.link().callback(|_| Msg::RNN)}>{"Rust NN"}</a>
-                        <a class="button" onclick={ctx.link().callback(|_| Msg::CurveEstimation)}>{"Curve Estimation"}</a>
+                        <a class="button" onclick={ctx.link().callback(|_| Proj::SprayerMods)}>{"Sprayer Mods"}</a>
+                        <a class="button" onclick={ctx.link().callback(|_| Proj::ModelForge)}>{"ModelForge"}</a>
+                        <a class="button" onclick={ctx.link().callback(|_| Proj::CEPA)}>{"CEPA"}</a>
+                        <a class="button" onclick={ctx.link().callback(|_| Proj::CurveEstimation)}>{"Curve Estimation"}</a>
                     </div>
                 )
             }
             _ => {
                 html!(
                 <div class="project-container">
-                    <a class="back-button" onclick={ctx.link().callback(|_| Msg::None)}><i class="fa-sharp fa-solid fa-arrow-left"></i></a>
+                    <a class="back-button" onclick={ctx.link().callback(|_| Proj::None)}><i class="fa-sharp fa-solid fa-arrow-left"></i></a>
                     {self.get_inner_html()}
                 </div>
                 )
@@ -93,16 +93,16 @@ impl Component for ProjContainer {
 impl ProjContainer {
     fn get_inner_html(&self) -> Html {
         match self.proj_highlight {
-            Msg::SprayerMods => {
+            Proj::SprayerMods => {
                 html!(<SprayerMods/>)
             }
-            Msg::ModelForge => {
+            Proj::ModelForge => {
                 html!(<ModelForge/>)
             }
-            Msg::RNN => {
-                html!(<RNN/>)
+            Proj::CEPA => {
+                html!(<CEPA/>)
             }
-            Msg::CurveEstimation => {
+            Proj::CurveEstimation => {
                 html!(<CurveEstimation/>)
             }
             _ => {

@@ -79,15 +79,15 @@ impl Component for Model {
             <>
                 <Title show={true}/>
                 <Simulation settings={self.settings.clone()} generation={self.generation} paused={self.paused}/>
-                
+
                 <div class="button-container">
-                <a onclick={ctx.link().callback(|_| Msg::ToggleAbout)} class="side button">{self.get_proj_btn_txt()}</a>
-                <a class="button" href="https://linkedin.com/in/blake-espeland/">{self.get_linkedin_icon()}</a>
-                <a class="button" href="https://github.com/blake-espeland/">{self.get_github_icon()}</a>
-                <a class="button" download="Blake_Espeland_Resume.docx" href="resources/Blake_Espeland_Resume.docx" title="Download Resume">
-                {self.get_resume_icon()}
-                </a>
-                <a onclick={ctx.link().callback(|_| Msg::TogglePause)} class="button">{self.get_pause_play()}</a>
+                    <a onclick={ctx.link().callback(|_| Msg::ToggleAbout)} class="side button">{self.get_proj_btn_txt()}</a>
+                    <a class="button" href="https://linkedin.com/in/blake-espeland/">{self.get_linkedin_icon()}</a>
+                    <a class="button" href="https://github.com/blake-espeland/">{self.get_github_icon()}</a>
+                    <a class="button" download="Blake_Espeland_Resume.pdf" href="resources/Blake_Espeland_Resume.pdf" title="Download Resume">
+                        {self.get_resume_icon()}
+                    </a>
+                    <a onclick={ctx.link().callback(|_| Msg::TogglePause)} class="button">{self.get_pause_play()}</a>
                 </div>
 
                 <ProjContainer show={!self.render_about}/>
@@ -104,6 +104,11 @@ impl Model {
             "About"
         }
     }
+
+    fn get_resume_icon(&self) -> Html {
+        html!(<i class="fa-solid fa-file-arrow-down icon"></i>)
+    }
+
     fn get_pause_play(&self) -> Html {
         if self.paused {
             html!(<i class="fa fa-play icon" aria-hidden="true"></i>)
@@ -115,11 +120,9 @@ impl Model {
     fn get_linkedin_icon(&self) -> Html {
         html!(<i class="fa-brands fa-linkedin icon"></i>)
     }
+
     fn get_github_icon(&self) -> Html {
         html!(<i class="fa-brands fa-github icon"></i>)
-    }
-    fn get_resume_icon(&self) -> Html {
-        html!(<i class="fa-solid fa-file-arrow-down icon"></i>)
     }
 }
 

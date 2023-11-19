@@ -1,6 +1,6 @@
 $shade-0: #fff !default;
 $shade-1: #d7dcdf !default;
-$shade-2: #FF731D;
+$red: #f06262;
 $shade-10: #2c3e50 !default;
 $teal: #1abc9c !default;
 $beige: #F8EDE3;
@@ -45,10 +45,15 @@ body {
   font-size: 1.4em;
 }
 
+.boid {
+  background-color: $shade-10;
+}
+
+
 .title {
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke-width: 2px;
-  -webkit-text-stroke-color: $shade-10;
+  -webkit-text-stroke-color: $red;
   font-style: italic;
   font-size: 4em;
 }
@@ -67,7 +72,7 @@ body {
 }
 
 .button {
-  color: $shade-10;
+  -webkit-text-fill-color: $shade-10;
   background: transparent;
   padding-top: 10px;
 
@@ -86,6 +91,10 @@ body {
   &:active {
     transform: scale(0.9);
   }
+}
+
+.side {
+  -webkit-text-fill-color: $red;
 }
 
 .project-container {
@@ -156,6 +165,12 @@ body {
 .project-container h2 {
   font-style: italic;
   font-size: 1.2em;
+  margin-left: 1%
+}
+
+.project-container h3 {
+  font-style: italic;
+  font-size: 1.0em;
   margin-left: 1%
 }
 

@@ -16,7 +16,7 @@ impl Component for SprayerMods{
                 <div class="head-container">
                     <h1>{"Sprayer Mods"}</h1>
                 </div>
-                <h2>{"CTO October 2020 - October 2022"}</h2>
+                <h2>{"Development Lead"}</h2>
                 <p>{"Sprayer Mods is a startup that is attempting to revolutionize agriculture by competing
                      with industry giants like John Deere, Raven, and Case-New Holland. We created a 
                      retrofittable spot-spraying system for agricultural herbicide sprayers. In English, 
