@@ -4,7 +4,7 @@ use rand::Rng;
 use std::iter;
 use yew::{html, Html};
 
-const BOID_RAD: f64 = 3.0;
+const BOID_RAD: f64 = 1.5;
 
 #[derive(Clone, Debug, PartialEq)]
 pub struct Boid {
